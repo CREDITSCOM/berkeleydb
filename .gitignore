@@ -1,1 +1,3 @@
 build_windows/x64
+build_unix/*
+!build_unix/.IGNORE_ME
