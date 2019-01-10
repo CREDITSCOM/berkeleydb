@@ -44,7 +44,7 @@ else()
   execute_process(COMMAND sh ../dist/configure --prefix=${_db_working_folder}/build --disable-shared --with-repmgr-ssl=no --enable-cxx ${build_debug_option}
                   WORKING_DIRECTORY ${_db_working_folder})
 
-  execute_process(COMMAND make
+  execute_process(COMMAND make -j4
                   WORKING_DIRECTORY ${_db_working_folder})
                   
   execute_process(COMMAND make install
