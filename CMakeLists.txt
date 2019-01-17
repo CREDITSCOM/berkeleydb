@@ -69,4 +69,11 @@ set_property(TARGET BerkeleyDB PROPERTY IMPORTED_LOCATION_DEBUG
   ${_db_lib_folder}/${build_type_folder}/${_bdb_lib_name}${_bdb_debug_suffix}${CMAKE_STATIC_LIBRARY_SUFFIX}
   )
   
+set_property(TARGET BerkeleyDB PROPERTY IMPORTED_LOCATION_RELMONITOR
+  ${_db_lib_folder}/${build_type_folder}/${_bdb_lib_name}${CMAKE_STATIC_LIBRARY_SUFFIX}
+  )
+set_property(TARGET BerkeleyDB PROPERTY IMPORTED_LOCATION_RELSPAM
+  ${_db_lib_folder}/${build_type_folder}/${_bdb_lib_name}${CMAKE_STATIC_LIBRARY_SUFFIX}
+  )
+  
 target_include_directories(BerkeleyDB SYSTEM INTERFACE ${include_files_location})
