@@ -75,5 +75,8 @@ set_property(TARGET BerkeleyDB PROPERTY IMPORTED_LOCATION_RELMONITOR
 set_property(TARGET BerkeleyDB PROPERTY IMPORTED_LOCATION_RELSPAM
   ${_db_lib_folder}/${build_type_folder}/${_bdb_lib_name}${CMAKE_STATIC_LIBRARY_SUFFIX}
   )
+set_property(TARGET BerkeleyDB PROPERTY IMPORTED_LOCATION_RELWALLET
+  ${_db_lib_folder}/${build_type_folder}/${_bdb_lib_name}${CMAKE_STATIC_LIBRARY_SUFFIX}
+  )
   
 target_include_directories(BerkeleyDB SYSTEM INTERFACE ${include_files_location})
