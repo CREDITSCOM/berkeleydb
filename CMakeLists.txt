@@ -27,7 +27,7 @@ if(WIN32)
   execute_process(COMMAND ${CMAKE_VS_MSBUILD_COMMAND} ${msbuild_parallel} ${proj_to_build} ${msbuild_config} ${msbuild_platform}
 				  WORKING_DIRECTORY ${db_sln_dir})
 				  
-  execute_process(COMMAND git apply ${db_patch} -R
+  execute_process(COMMAND git apply --ignore-space-change ${db_patch} -R
                   WORKING_DIRECTORY ${db_sln_dir})
 				  
   set(_db_lib_folder ${db_sln_dir}/../x64)
