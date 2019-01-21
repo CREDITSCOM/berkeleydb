@@ -9,7 +9,7 @@ if(WIN32)
     set(db_patch ${db_sln_dir}/../../../patches/berkeleydb_141_17134_retargeting.patch)
   endif()
   
-  execute_process(COMMAND git apply ${db_patch}
+  execute_process(COMMAND git apply --ignore-space-change ${db_patch}
                   WORKING_DIRECTORY ${db_sln_dir})
 				  
   if(CMAKE_BUILD_TYPE MATCHES Debug)
