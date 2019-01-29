@@ -36,24 +36,27 @@ if(WIN32)
 
 else()
   set(_db_working_folder ${CMAKE_CURRENT_SOURCE_DIR}/build_unix)
-  
-  if(CMAKE_BUILD_TYPE MATCHES Debug)
-    set(build_debug_option "--enable-debug")
-  endif()
-
-  execute_process(COMMAND sh ../dist/configure --prefix=${_db_working_folder}/build --disable-shared --with-repmgr-ssl=no --enable-cxx ${build_debug_option}
-                  WORKING_DIRECTORY ${_db_working_folder})
-
-  execute_process(COMMAND make -j4
-                  WORKING_DIRECTORY ${_db_working_folder})
-                  
-  execute_process(COMMAND make install
-                  WORKING_DIRECTORY ${_db_working_folder})
-
   set(_db_lib_folder ${_db_working_folder}/build/lib)
   set(build_type_folder .)
   set(_bdb_lib_name libdb_cxx-18.1)
   set(include_files_location ${_db_working_folder}/build/include)
+  
+  if(EXISTS ${_db_lib_folder}/${build_type_folder}/${_bdb_lib_name}${_bdb_debug_suffix}${CMAKE_STATIC_LIBRARY_SUFFIX})
+    message(STATUS "Berkeley DB has already been built")
+  else()
+    if(CMAKE_BUILD_TYPE MATCHES Debug)
+      set(build_debug_option "--enable-debug")
+    endif()
+
+    execute_process(COMMAND sh ../dist/configure --prefix=${_db_working_folder}/build --disable-shared --with-repmgr-ssl=no --enable-cxx ${build_debug_option}
+                    WORKING_DIRECTORY ${_db_working_folder})
+
+    execute_process(COMMAND make -j4
+                    WORKING_DIRECTORY ${_db_working_folder})
+                  
+    execute_process(COMMAND make install
+                    WORKING_DIRECTORY ${_db_working_folder})
+  endif()
 endif()
 
 
