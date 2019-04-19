@@ -3,10 +3,14 @@ cmake_minimum_required(VERSION 3.11)
 if(WIN32)
   set(db_sln_dir ${CMAKE_CURRENT_SOURCE_DIR}/build_windows/VS15)
   
-  if(${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION} MATCHES 10.0.17763.0)
-    set(db_patch ${db_sln_dir}/../../../patches/berkeleydb_141_17763_retargeting.patch)
+  if(${MSVC_TOOLSET_VERSION} MATCHES 142)
+	set (db_patch ${db_sln_dir}/../../../patches/berkeley142_retargeting.patch)
   else()
-    set(db_patch ${db_sln_dir}/../../../patches/berkeleydb_141_17134_retargeting.patch)
+    if(${CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION} MATCHES 10.0.17763.0)
+      set(db_patch ${db_sln_dir}/../../../patches/berkeleydb_141_17763_retargeting.patch)
+    else()
+      set(db_patch ${db_sln_dir}/../../../patches/berkeleydb_141_17134_retargeting.patch)
+    endif()
   endif()
   
   execute_process(COMMAND git apply --ignore-space-change ${db_patch}
