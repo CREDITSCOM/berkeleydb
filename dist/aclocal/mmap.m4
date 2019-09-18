@@ -105,6 +105,13 @@ if test "$mmap_ok" = "yes" ; then
 	    for (i = sizeof(buf); i < total_size; i += gapsize)
 		    base[i] = 'A';
 
+	    for (i = 0; i < TEST_MMAP_BUFSIZE; ++i) {
+	        if (base[i] != 0) {
+		    perror("dirty original map");
+		    return (5);
+	        }
+	    }
+
 	    close(fd);
 	    (void) unlink(underlying);
 	    return (0);
